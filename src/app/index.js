@@ -29,7 +29,7 @@ class App extends React.Component {
 }
 
 render(<App />, window.document.getElementById('app'));*/
-import { createStore, combineReducers } from "redux"
+import { createStore, combineReducers, applyMiddleware } from "redux"
 
 const initialMathState = {
     result: 1,
@@ -84,9 +84,12 @@ const userReducer = (state = initialUserState, action) => {
 }
 
 
+const myLogger = (store) => (next) => (action) => {
+    console.log("Logged Action: ", action);
+    next(action);
+}
 
-
-const store = createStore(combineReducers({mathReducer,userReducer}));
+const store = createStore(combineReducers({ mathReducer, userReducer }), {}, applyMiddleware(myLogger));
 
 store.subscribe(() => {
     console.log("store updated", store.getState());
