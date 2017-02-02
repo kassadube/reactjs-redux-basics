@@ -31,13 +31,27 @@ class App extends React.Component {
 render(<App />, window.document.getElementById('app'));*/
 import { createStore } from "redux"
 
-const reducer = (state, action) => {
+const initialState = {
+    result: 1,
+    lastValues: [],
+    userName: "noam"
+}
+
+const reducer = (state = initialState, action) => {
     switch (action.type) {
         case "ADD":
-            state = state + action.payload;
+            state = {
+                ...state,
+                result: state.result + action.payload,
+                lastValues: [...state.lastValues, action.payload]
+            };
             break;
         case "SUBTRACT":
-        state = state - action.payload;
+            state = {
+                ...state,
+                result: state.result - action.payload,
+                lastValues: [...state.lastValues, action.payload]
+            };
             break;
         default:
             break;
@@ -46,7 +60,7 @@ const reducer = (state, action) => {
 }
 
 
-const store = createStore(reducer, 1);
+const store = createStore(reducer);
 
 store.subscribe(() => {
     console.log("store updated", store.getState());
