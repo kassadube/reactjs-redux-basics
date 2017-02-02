@@ -22,6 +22,6 @@ const userReducer = (state = initialUserState, action) => {
 export default userReducer;
 
 const initialUserState = {
-    name: "moshe",
+    name: "moshe34",
     age: 99
 }
