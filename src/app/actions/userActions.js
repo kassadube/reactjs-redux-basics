@@ -1,5 +1,5 @@
 export function setName(name) {
-    return dispatch => {
+    /*return dispatch => {
         setTimeout(() => {
             dispatch({
                 type: "SET_NAME",
@@ -7,6 +7,15 @@ export function setName(name) {
             });
         }, 5000)
 
+    };*/
+    return {
+        type: "SET_NAME",
+        payload: new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(name);
+            }, 3000);
+        }
+        )
     };
 }
 

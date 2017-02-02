@@ -3,6 +3,7 @@ import logger from "redux-logger";
 import mathReducer from "./reducers/mathReducer";
 import userReducer from "./reducers/userReducer";
 import thunk from "redux-thunk";
+import promise from "redux-promise-middleware";
 
 
 
@@ -16,5 +17,5 @@ const myLogger = (store) => (next) => (action) => {
 export default createStore(combineReducers(
     { mathReducer, userReducer }),
     {},
-    applyMiddleware(myLogger, logger(), thunk)
+    applyMiddleware(myLogger, logger(), promise())
 );
