@@ -1,36 +1,12 @@
-/*import React from "react";
+import React from "react";
 import {render} from "react-dom";
-
-import { User } from './components/User';
-import { Main } from './components/Main';
-
-class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            username: "Max"
-        };
-    }
-
-    changeUsername(newName) {
-        this.setState({
-            username: newName
-        });
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <Main changeUsername={this.changeUsername.bind(this)}/>
-                <User username={this.state.username}/>
-            </div>
-        );
-    }
-}
-
-render(<App />, window.document.getElementById('app'));*/
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import {Provider} from "react-redux";
+
+import App from './components/App';
+
+
 
 const initialMathState = {
     result: 1,
@@ -98,29 +74,9 @@ store.subscribe(() => {
     // console.log("store updated", store.getState());
 })
 
-store.dispatch({
-    type: "ADD",
-    payload: 10,
-});
 
-store.dispatch({
-    type: "ADD",
-    payload: 15,
-});
-
-store.dispatch({
-    type: "SUBTRACT",
-    payload: 10,
-});
-
-store.dispatch({
-    type: "SUBTRACT",
-    payload: 3,
-});
-
-store.dispatch({
-    type: "SET_NAME",
-    payload: "MOKL",
-});
-
-
+render(
+<Provider store={store}>
+    <App />
+</Provider>
+, window.document.getElementById('app'));
